@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Country from '../../models/country';
 import { CountryService } from '../../services/country.service';
-import { HttpClientModule } from '@angular/common/http';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-country-list',
@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './country-list.component.scss'
 })
 export class CountryListComponent implements OnInit {
-  public countries: Country[] | null = null;
+  public countries: Country[] = [];
 
   constructor(private countryService: CountryService) { }
 
@@ -17,7 +17,16 @@ export class CountryListComponent implements OnInit {
     this.getCountries();
   }
 
-  getCountries(): void {
-    this.countryService.getCountries().subscribe(countries => this.countries = countries);
+  public getCountries(): void {
+    this.countryService.getCountries().subscribe(countries => {
+      this.countries = countries.map(country => ({
+        ...country,
+        flagUrl: this.getFlagUrl(country.flagUrl)
+      }));
+    });
+  }
+
+  public getFlagUrl(isoCode: string): string {
+    return `https://countryflagsapi.netlify.app/flag/${isoCode}.svg`;
   }
 }

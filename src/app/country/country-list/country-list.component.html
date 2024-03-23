@@ -1,0 +1,18 @@
+<ul>
+  <li *ngFor="let country of countries">
+    <img [src]="null" alt="{{ country.name }}" width="30" height="20">
+    <div class="card-desc">
+      <p><a [routerLink]="['/country', country.name.common]">{{ country.name.common }}</a></p>
+      <span>
+        <p> <b>Population</b>: {{country.population}}</p>
+        <p> <b>Region</b>: {{country.region}}</p>
+        <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
+      </span>
+    </div>
+    <div class="card-buttons">
+      <button>Edit</button>
+      <button>Delete</button>
+    </div>
+  </li>
+</ul>
+

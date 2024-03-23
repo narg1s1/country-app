@@ -1,0 +1,21 @@
+ul {
+  list-style: none;
+  display: grid;
+  grid-gap: 5rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  & li {
+    background-color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  & .card-desc, 
+  & .card-buttons {
+    padding: 10px 15px;
+  }
+
+  & .card-buttons {
+    display: flex;
+    gap: 10px;
+  }
+}
