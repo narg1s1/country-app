@@ -1,0 +1,7 @@
+<div class="pagination">
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="isFirstPage()">Previous</button>
+    <span>Page <b>{{ currentPage }}</b> of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="isLastPage()">Next</button>
+  </div>
+</div>

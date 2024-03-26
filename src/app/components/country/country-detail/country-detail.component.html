@@ -1,0 +1,31 @@
+<div *ngIf="isAdmin(); else operatorView">
+  <form>
+    <label>Capital:</label>
+    <input type="text" [(ngModel)]="country.capital[0]" name="capital">
+    <label>Region:</label>
+    <input type="text" [(ngModel)]="country.region" name="region">
+    <label>Population:</label>
+    <input type="number" [(ngModel)]="country.population" name="population">
+    <label>Currency:</label>
+    <input type="text" name="currency">
+    <label>Flag URL:</label>
+    <input type="text" [(ngModel)]="country.flagUrl" name="flag">
+    <div>
+      <button (click)="updateCountry()">Update</button>
+      <button (click)="deleteCountry()">Delete</button>
+      <button (click)="goBack()">Go Back</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #operatorView>
+  <div>
+    <h2>{{ country.name.common }}</h2>
+    <p><strong>Capital:</strong> {{ country.capital[0] }}</p>
+    <p><strong>Region:</strong> {{ country.region }}</p>
+    <p><strong>Population:</strong> {{ country.population }}</p>
+    <p><strong>Currency:</strong> </p>
+    <p><img [src]="country.flagUrl" alt="{{ country.name.common }}" width="100" height="60"></p>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+</ng-template>

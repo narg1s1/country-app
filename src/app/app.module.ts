@@ -11,10 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 
-import { CountryModule } from './country/country.module';
-import { AuthGuard } from './services/auth.guard';
 import { CountryService } from './services/country.service';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthService } from './services/authentication.service';
+import { CountryModule } from './components/country/country.module';
+import { UserAuthModule } from './components/user-auth/user-auth.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -31,9 +32,10 @@ import { AuthenticationService } from './services/authentication.service';
     MatSelectModule,
     MatPaginatorModule,
     RouterModule,
+    UserAuthModule,
+    SharedModule,
     BrowserAnimationsModule,
-    CountryModule,
   ],
-  providers: [AuthGuard, CountryService, AuthenticationService]
+  providers: [CountryService, AuthService]
 })
 export class AppModule { }

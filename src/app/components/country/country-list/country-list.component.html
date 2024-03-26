@@ -1,0 +1,23 @@
+<app-country-header></app-country-header>
+<div class="country-list__container">
+  <h1>{{ userName }}</h1>
+  <ul>
+    <li *ngFor="let country of countries">
+      <img [src]="null" alt="{{ country.name.common }}" width="30" height="20">
+      <div class="card-desc">
+        <p><a [routerLink]="['/country', country.name.common]">{{ country.name.common }}</a></p>
+        <span>
+          <p><b>Population</b>: {{ country.population }}</p>
+          <p><b>Region</b>: {{ country.region }}</p>
+          <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<app-pagination 
+  [currentPage]="currentPage" 
+  [totalPages]="totalPages" 
+  (pageChange)="onPageChange($event)">
+</app-pagination>
