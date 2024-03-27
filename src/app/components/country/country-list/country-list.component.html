@@ -1,23 +1,39 @@
 <app-country-header></app-country-header>
 <div class="country-list__container">
   <h1>{{ userName }}</h1>
-  <ul>
-    <li *ngFor="let country of countries">
-      <img [src]="null" alt="{{ country.name.common }}" width="30" height="20">
+
+  <!-- Dropdown filter by country region -->
+  <!-- <select id="regionSelect" [(ngModel)]="selectedRegion" (change)="filterCountries()">
+    <option value="">Filter By Region</option>
+    <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+  </select> -->
+
+  <ul class="country-list__card">
+    <li *ngFor="let country of countries" class="country-list__card--element">
+      <div class="country-list__card--manage">
+        <button>
+          <app-icon-edit></app-icon-edit>
+        </button>
+        <button>
+          <app-icon-delete></app-icon-delete>
+        </button>
+      </div>
+      <img [src]="getFlagUrl(country.flagUrl)" alt="{{ country.name }}" width="30" height="20">
       <div class="card-desc">
-        <p><a [routerLink]="['/country', country.name.common]">{{ country.name.common }}</a></p>
+        <p><a [routerLink]="['/country', country.name.common]">{{ country.name }}</a></p>
         <span>
           <p><b>Population</b>: {{ country.population }}</p>
           <p><b>Region</b>: {{ country.region }}</p>
           <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
         </span>
       </div>
-    </li>
+    </li> 
   </ul>
+  
+  <app-pagination 
+    [currentPage]="currentPage" 
+    [totalPages]="totalPages" 
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
 </div>
 
-<app-pagination 
-  [currentPage]="currentPage" 
-  [totalPages]="totalPages" 
-  (pageChange)="onPageChange($event)">
-</app-pagination>

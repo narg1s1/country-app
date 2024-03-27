@@ -11,6 +11,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CountryHeaderComponent } from './country-header/country-header.component';
 import { CountryListComponent } from './country-list/country-list.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { UiIconsModule } from '../../assets/ui-icons/ui-icons.module';
 
 @NgModule({
   imports: [
@@ -21,8 +24,11 @@ import { CountryDetailComponent } from './country-detail/country-detail.componen
     MatButtonModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
     SharedModule,
-    CommonModule
+    CommonModule,
+    UiIconsModule
   ],
   declarations: [
     CountryListComponent,

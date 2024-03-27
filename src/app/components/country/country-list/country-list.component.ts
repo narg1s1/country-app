@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import Country from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
 import { AuthService } from '../../../services/authentication.service';
@@ -11,6 +11,10 @@ import { AuthService } from '../../../services/authentication.service';
 export class CountryListComponent implements OnInit {
   public countries: Country[] = [];
   public allCountries: Country[] = [];
+
+  filteredCountries: Country[] = [];
+  regions: string[] = [];
+  selectedRegion: string = '';
 
   public totalPages: number = 0;
   public currentPage: number = 1;
@@ -36,6 +40,16 @@ export class CountryListComponent implements OnInit {
     });
   }
 
+  public filterCountries(): void {
+    if (this.selectedRegion) {
+      this.countries = this.allCountries.filter(country => country.region === this.selectedRegion);
+    } else {
+      this.countries = [...this.allCountries]; // Reset to all countries if no region is selected
+    }
+    this.totalPages = Math.ceil(this.countries.length / this.itemsPerPage);
+    this.onPageChange(1); // Reset to first page after filtering
+  }
+  
   public onPageChange(pageNumber: number) {
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.currentPage = pageNumber;
@@ -47,10 +61,10 @@ export class CountryListComponent implements OnInit {
 
   public getFlagUrl(isoCode: string): string {
     // return `https://countryflagsapi.netlify.app/flag/${isoCode}.svg`;
-    return ``;
+    return `https://countryflagsapi.netlify.app/flag/MT.svg`;
   }
 
   public get userName(): string {
-    return '';
+    return 'Admin';
   }
 }

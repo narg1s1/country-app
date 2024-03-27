@@ -1,25 +1,86 @@
-.country-list__container {
-  padding: 2rem 4rem;
-}
-ul {
-  list-style: none;
-  display: grid;
-  grid-gap: 5rem;
-  padding: 0;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-
-  & li {
-    background-color: #fff;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.country-list {
+  &__container {
+    padding: 0 2rem 2rem;
   }
 
-  & .card-desc, 
-  & .card-buttons {
-    padding: 10px 15px;
-  }
-
-  & .card-buttons {
+  &__card {
+    list-style: none;
     display: flex;
-    gap: 10px;
+    grid-gap: 5rem;
+    padding: 0;
+    flex-wrap: wrap;
+
+    &--element {
+      position: relative;
+      background-color: #fff;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      display: flex;
+      justify-items: start;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: nowrap;
+
+      & a {
+        font-size: 18px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #000;
+      }
+
+      & img {
+        width: auto;
+        height: 150px;
+      }
+    }
+
+    &--manage {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      top: -30px;
+      right: 0;
+
+      &.visible {
+        opacity: 1;
+      }
+  
+      & button {
+        border: 1px solid #ebe2e2;
+        border-radius: 3px;
+        border-bottom: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: #fff;
+      }
+    }
+  
+    & .card-desc, 
+    & .card-buttons {
+      padding: 10px 15px;
+    }
+
+    & .card-buttons {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+
+select {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+  margin: 10px 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  
+  &::-ms-expand {
+    display: none;
+  }
+
+  & option {
+    padding: 5px 10px;
   }
 }

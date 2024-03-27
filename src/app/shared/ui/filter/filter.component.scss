@@ -1,0 +1,15 @@
+select {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+  margin: 10px 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  
+  &::-ms-expand {
+    display: none;
+  }
+
+  & option {
+    padding: 5px 10px;
+  }
+}

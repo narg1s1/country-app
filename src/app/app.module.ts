@@ -16,25 +16,28 @@ import { AuthService } from './services/authentication.service';
 import { CountryModule } from './components/country/country.module';
 import { UserAuthModule } from './components/user-auth/user-auth.module';
 import { SharedModule } from './shared/shared.module';
-
+import { UiIconsModule } from './assets/ui-icons/ui-icons.module';
 
 @NgModule({
   declarations: [],
   imports: [
     FormsModule,
     CommonModule,
-    CountryModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule,
+    BrowserAnimationsModule,
+
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
     MatPaginatorModule,
-    RouterModule,
+  
     UserAuthModule,
+    CountryModule,
+    UiIconsModule,
     SharedModule,
-    BrowserAnimationsModule,
   ],
   providers: [CountryService, AuthService]
 })
