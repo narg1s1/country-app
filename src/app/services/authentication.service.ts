@@ -1,26 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private isAuthenticated: boolean = false;
-  // private userRole: string | null = null;
+  private currentUserSubject!: BehaviorSubject<User>;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   // Method for user login
-  public login(username: string, password: string, role: string): boolean {
-    // Implement your authentication logic here
-    // if ((role === 'Admin' && username === 'admin' && password === 'admin') ||
-    //     (role === 'Operator' && username === 'operator' && password === 'operator')) {
-    //   this.isAuthenticated = true;
-    //   this.userRole = role;
-    //   return true;
-    // }
-    return false;
+  login(email: string, password: string, role: string) {
+    return this.http.post<any>(`/login`, { email, password, role })
+    .pipe(map(user => {
+      if (user && user.token) {
+        // store user details in local storage to keep user logged in
+        localStorage.setItem('currentUser', JSON.stringify(user.result));
+        this.currentUserSubject.next(user);
+      }
+    }))
   }
-
+  register(user: User) {
+    return this.http.post(`auth/register`, user);
+  }
+  
   // Method for user logout
   logout(): void {
     // this.isAuthenticated = false;

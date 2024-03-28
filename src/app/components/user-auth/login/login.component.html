@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="card">
+    <h3>Welcome back!</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()" class="login-form">
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="email" class="login-label">Email</label>
+        <input 
+          type="text" 
+          formControlName="email" 
+          class="login-input" 
+          [ngClass]="{ 'login-input-error': submitted && fval['email'].errors }" 
+          placeholder="Enter email here"
+        />
+        <div *ngIf="submitted && fval['email'].errors" class="login-error">
+          <div *ngIf="fval['email'].errors['required']" class="login-error-message">Email is required</div>
+          <div *ngIf="fval['email'].errors['email']" class="login-error-message">Enter valid email address</div>
+        </div>
+      </div>
+      <!-- Password Input -->
+      <div class="form-group">
+        <label for="password" class="login-label">Password</label>
+        <input 
+          type="password" 
+          formControlName="password" 
+          class="login-input" 
+          [ngClass]="{ 'login-input-error': submitted && fval['password'].errors }" 
+          placeholder="Enter password here" 
+        />
+        <div *ngIf="submitted && fval['password'].errors" class="login-error">
+          <div *ngIf="fval['password'].errors['required']" class="login-error-message">Password is required</div>
+        </div>
+      </div>
+      <!-- Role Selection -->
+      <div class="form-group">
+        <label class="login-label">User Role:</label>
+        <div class="login-role-selection">
+          <label class="login-role-label">
+            <input type="radio" formControlName="role" [value]="'admin'" class="login-role-input"> Admin
+          </label>
+          <label class="login-role-label">
+            <input type="radio" formControlName="role" [value]="'operator'" class="login-role-input"> Operator
+          </label>
+        </div>
+      </div>
+      <!-- Login Button -->
+      <div class="form-group">
+        <button [disabled]="loading" class="login-button">
+          <span *ngIf="loading" class="login-spinner"></span>
+          Login
+        </button>
+        <a routerLink="/register" class="login-link">Register</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -28,6 +28,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule,
     FormsModule, 
+    ReactiveFormsModule,
   
     MatButtonModule,
     MatPaginatorModule,
@@ -50,6 +51,6 @@ const routes: Routes = [
     CountryListComponent, 
     CountryDetailComponent, 
     CountryHeaderComponent,
-  ]
+  ],
 })
 export class CountryModule { }
