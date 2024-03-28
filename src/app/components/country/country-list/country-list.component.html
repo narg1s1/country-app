@@ -2,11 +2,19 @@
 <div class="country-list__container">
   <h1>{{ userName }}</h1>
 
-  <!-- Dropdown filter by country region -->
-  <!-- <select id="regionSelect" [(ngModel)]="selectedRegion" (change)="filterCountries()">
-    <option value="">Filter By Region</option>
-    <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
-  </select> -->
+  <!-- Filtering country list -->
+  <div class="country-list__filters">
+    <!-- Search filter by country name -->
+    <app-search 
+      (searchChange)="onSearch($event)"
+    ></app-search>
+  
+    <!-- Dropdown filter by country region -->
+    <app-filter 
+      (regionSelected)="filterCountries()">
+    </app-filter>
+  </div>
+  
 
   <ul class="country-list__card">
     <li *ngFor="let country of countries" class="country-list__card--element">
@@ -18,7 +26,7 @@
           <app-icon-delete></app-icon-delete>
         </button>
       </div>
-      <img [src]="getFlagUrl(country.flagUrl)" alt="{{ country.name }}" width="30" height="20">
+      <img [src]="getFlagUrl(country.name.common)" alt="{{ country.name }}" width="30" height="20">
       <div class="card-desc">
         <p><a [routerLink]="['/country', country.name.common]">{{ country.name }}</a></p>
         <span>

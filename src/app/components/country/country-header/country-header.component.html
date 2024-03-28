@@ -2,7 +2,7 @@
   <h1>Where in the world?</h1>
   <div>
     <p *ngIf="isAuthenticated()"> <b>{{ getUserRole() }}</b> </p>
-    <button *ngIf="!isAuthenticated()" (click)="login()">Log In</button>
+    <button *ngIf="!isAuthenticated()"><a routerLink="login">Login</a></button>
     <button *ngIf="isAuthenticated()" (click)="logout()">Log Out</button>
   </div>
 </div>

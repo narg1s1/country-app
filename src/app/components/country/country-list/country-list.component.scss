@@ -1,14 +1,22 @@
 .country-list {
   &__container {
-    padding: 0 2rem 2rem;
+    padding: 0 4rem 2rem;
+  }
+
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__card {
     list-style: none;
     display: flex;
-    grid-gap: 5rem;
+    grid-gap: 4rem;
     padding: 0;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     &--element {
       position: relative;
@@ -65,22 +73,5 @@
       display: flex;
       gap: 10px;
     }
-  }
-}
-
-
-select {
-  border: none;
-  padding: 10px 15px;
-  border-radius: 3px;
-  margin: 10px 0;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  
-  &::-ms-expand {
-    display: none;
-  }
-
-  & option {
-    padding: 5px 10px;
   }
 }

@@ -13,7 +13,7 @@ import { CountryListComponent } from './country-list/country-list.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { UiIconsModule } from '../../assets/ui-icons/ui-icons.module';
+import { UiIconsModule } from '../../../assets/ui-icons/ui-icons.module';
 
 @NgModule({
   imports: [
