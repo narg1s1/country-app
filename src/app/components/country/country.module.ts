@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
@@ -14,21 +14,32 @@ import { CountryDetailComponent } from './country-detail/country-detail.componen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { UiIconsModule } from '../../../assets/ui-icons/ui-icons.module';
+import { UserAuthModule } from '../user-auth/user-auth.module';
+
+const routes: Routes = [
+  { path: '', component: CountryListComponent },
+  { path: ':name', component: CountryDetailComponent }
+];
 
 @NgModule({
   imports: [
     HttpClientModule, 
     MatDialogModule,
+    CommonModule,
     RouterModule,
     FormsModule, 
+  
     MatButtonModule,
     MatPaginatorModule,
     MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
+  
     SharedModule,
-    CommonModule,
-    UiIconsModule
+    UiIconsModule,
+    UserAuthModule,
+  
+    RouterModule.forChild(routes)
   ],
   declarations: [
     CountryListComponent,

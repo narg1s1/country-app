@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
   styleUrl: './country-header.component.scss'
 })
 export class CountryHeaderComponent {  
+  username: string = '';
+  password: string = '';
+  userRole: string = 'admin' || 'operator';
+  errorMessage: string = '';
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
