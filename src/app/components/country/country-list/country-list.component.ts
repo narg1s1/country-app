@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Country from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
 import { AuthService } from '../../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-country-list',
@@ -18,7 +19,8 @@ export class CountryListComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,6 @@ export class CountryListComponent implements OnInit {
       this.onPageChange(this.currentPage); // Load the current page of countries
     });
   }
-
   
   public onPageChange(pageNumber: number) {
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
@@ -46,14 +47,17 @@ export class CountryListComponent implements OnInit {
     }
   }
 
-  public filterCountries(): void {
-  }
+  public filterCountries(): void {}
 
-  public onSearch(searchTerm: string): void {
-  }
+  public onSearch(searchTerm: string): void {}
 
   public getFlagUrl(isoCode: string): string {
     return `https://countryflagsapi.netlify.app/flag/${isoCode}.svg`;
+  }
+
+  
+  public getCountryDetails(name: any): void {
+    this.router.navigate(['/countries', name]);
   }
 
   public get userName(): string {

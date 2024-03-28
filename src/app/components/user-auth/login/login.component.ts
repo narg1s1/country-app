@@ -15,10 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService : AuthService
+    private formBuilder: FormBuilder
   ) { }
   
   ngOnInit() {
@@ -39,14 +36,5 @@ export class LoginComponent implements OnInit {
     }
   
     this.loading = true;
-    this.authService
-      .login(this.fval['email'].value, this.fval['password'].value, this.fval['role'].value)
-      .subscribe(
-        data => {
-        this.router.navigate(['/countries']);
-      },
-      error => {
-        this.loading = false;
-      });
   }
 }

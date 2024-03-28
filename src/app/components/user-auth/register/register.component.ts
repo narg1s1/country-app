@@ -11,8 +11,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
   ) { }
 
   registerForm!: FormGroup;
@@ -32,21 +30,13 @@ export class RegisterComponent implements OnInit {
   
   get fval() { return this.registerForm.controls; }
 
-  onFormSubmit() {
+  public onFormSubmit() {
     this.submitted = true;
     // return for here if form is invalid
     if (this.registerForm.invalid) {
-    return;
+     return;
     }
     this.loading = true;
-    this.authService.register(this.registerForm.value).subscribe((data) => {
-      alert('User Registered successfully!!');
-        this.router.navigate(['/login']);
-      },
-      (error)=>{
-        this.loading = false;
-      }
-    )
   }
      
 }

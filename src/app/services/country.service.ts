@@ -16,12 +16,13 @@ export class CountryService {
     return this.http.get<any[]>(this.apiUrl)
     .pipe(
       map(response => response.map(country => ({
-        name: country.name.common,
+        name: country.name,
         capital: country.capital?.[0],
         currencies: country.currencies?.[0]?.name,
         region: country.region,
         population: country.population,
-        flagUrl: `https://countryflagsapi.netlify.app/flag/${country.countryIsoCode?.toLowerCase()}.svg`
+        cca2: country.cca2,
+        flagUrl: `https://countryflagsapi.netlify.app/flag/${country.flag?.toLowerCase()}.svg`
       }))),
       catchError(error => {
         console.error('An error occurred while fetching the countries.', error);
@@ -30,17 +31,8 @@ export class CountryService {
     );
   }
 
-  getCountry(id: string): Observable<Country> {
-    const countryUrl = `https://restcountries.com/v3.1/alpha/${id}`;
-    return this.http.get<any>(countryUrl).pipe(
-      map(country => ({
-        name: country.name.common,
-        capital: country.capital?.[0],
-        currencies: country.currencies?.[0]?.name,
-        region: country.region,
-        population: country.population,
-        flagUrl: `https://countryflagsapi.netlify.app/flag/${country.cca2.toLowerCase()}.svg`
-      }))
-    );
+  getCountry(name: string): Observable<Country> {
+    const countryUrl = `https://restcountries.com/v3.1/name/${name}`;
+    return this.http.get<Country>(countryUrl, {});
   }
 }

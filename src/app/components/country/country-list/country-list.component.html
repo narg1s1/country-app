@@ -28,7 +28,7 @@
       </div>
       <img [src]="getFlagUrl(country.name.common)" alt="{{ country.name }}" width="30" height="20">
       <div class="card-desc">
-        <p><a [routerLink]="['/country', country.name.common]">{{ country.name }}</a></p>
+        <p><a routerLink="" (click)="getCountryDetails(country.name)">{{ country.name }}</a></p>
         <span>
           <p><b>Population</b>: {{ country.population }}</p>
           <p><b>Region</b>: {{ country.region }}</p>

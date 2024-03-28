@@ -20,10 +20,10 @@ interface Country {
   currencies: { 
     [key: string]: Currency 
   };
+  cca2: string;
   capital: string[];
   region: string;
   population: number;
-  flagUrl: string;
 }
 
 export default Country;

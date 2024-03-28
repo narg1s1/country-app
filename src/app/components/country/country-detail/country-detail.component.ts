@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Country from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
-import { AuthService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-country-detail',
@@ -14,10 +13,9 @@ export class CountryDetailComponent implements OnInit {
   public country!: Country;
 
   constructor(
-    // private route: ActivatedRoute,
-    // private countryService: CountryService,
+    private route: ActivatedRoute,
+    private countryService: CountryService,
     private location: Location,
-    // private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -25,26 +23,13 @@ export class CountryDetailComponent implements OnInit {
   }
 
   public getCountry(): void {
-    // const id = this.route.snapshot.paramMap.get('id');
-    // if (id !== null) {
-    //   this.countryService.getCountry(id)
-    //     .subscribe(country => this.country = country);
-    // }
+    const name = this.route.snapshot.paramMap.get('name');
+    
+    if (name !== null) {
+      this.countryService.getCountry(name)
+        .subscribe(country => this.country = country);
+    }
   }
-
-  public isOperator(): boolean {
-    return false;
-    // return this.authService.isUserOperator();
-  }
-
-  public isAdmin(): boolean {
-    // return this.authService.isUserAdmin();
-    return true;
-  }
-
-  public updateCountry(): void {}
-
-  public deleteCountry(): void {}
 
   public goBack(): void {
     this.location.back();
