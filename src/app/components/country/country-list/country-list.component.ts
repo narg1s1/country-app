@@ -15,7 +15,7 @@ export class CountryListComponent implements OnInit {
 
   public totalPages: number = 0;
   public currentPage: number = 1;
-  public itemsPerPage: number = 12;
+  public itemsPerPage: number = 10;
 
   constructor(
     private countryService: CountryService,
@@ -30,8 +30,7 @@ export class CountryListComponent implements OnInit {
   public getCountries(): void {
     this.countryService.getCountries().subscribe((allCountries: any[]) => {
       this.allCountries = allCountries.map(country => ({
-        ...country,
-        flagUrl: this.getFlagUrl(country.flagUrl)
+        ...country
       }));
       this.totalPages = Math.ceil(this.allCountries.length / this.itemsPerPage);
       this.onPageChange(this.currentPage); // Load the current page of countries
@@ -51,11 +50,11 @@ export class CountryListComponent implements OnInit {
 
   public onSearch(searchTerm: string): void {}
 
-  public getFlagUrl(isoCode: string): string {
-    return `https://countryflagsapi.netlify.app/flag/${isoCode}.svg`;
+  public getFlagUrl(flag: string): string {
+    // return `https://countryflagsapi.netlify.app/emoji/${flag}.svg`;
+    return ``;
   }
 
-  
   public getCountryDetails(name: any): void {
     this.router.navigate(['/countries', name]);
   }

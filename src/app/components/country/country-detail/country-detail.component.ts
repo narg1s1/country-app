@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Country from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-detail',
@@ -10,25 +13,39 @@ import { CountryService } from '../../../services/country.service';
   styleUrl: './country-detail.component.scss'
 })
 export class CountryDetailComponent implements OnInit {
-  public country!: Country;
+  // public country!: Country;
+  country$!: Observable<Country>;
 
   constructor(
     private route: ActivatedRoute,
-    private countryService: CountryService,
+    private http: HttpClient,
     private location: Location,
   ) { }
 
   ngOnInit(): void {
-    this.getCountry();
+    const name = this.route.snapshot.paramMap.get('name');
+    if (name) {
+      this.country$ = this.getCountry(name).pipe(
+        map((countries: Country[]) => countries[0])
+      );
+    }
   }
 
-  public getCountry(): void {
-    const name = this.route.snapshot.paramMap.get('name');
-    
-    if (name !== null) {
-      this.countryService.getCountry(name)
-        .subscribe(country => this.country = country);
+  getCountry(name: string): Observable<Country[]> {
+    const countryUrl = `https://restcountries.com/v3.1/name/${name}`;
+    return this.http.get<Country[]>(countryUrl);
+  }
+
+  getCurrency(currencies: { [key: string]: { name: string; symbol: string; } }): string {
+    const currency = Object.values(currencies)[0]; // Assuming only one currency is present
+    return `${currency.name} (${currency.symbol})`;
+  }
+
+  getAllLanguages(languages: { [key: string]: string } | undefined): string[] {
+    if (!languages) {
+      return [];
     }
+    return Object.values(languages);
   }
 
   public goBack(): void {

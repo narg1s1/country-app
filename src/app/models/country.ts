@@ -15,15 +15,34 @@ interface Currency {
   symbol: string;
 }
 
+interface GoogleMaos {
+  googleMaps: string;
+  openStreetMaps: string;
+}
+
+interface Flags {
+  png: string;
+  svg: string;
+  alt: string;
+}
+
 interface Country {
   name: Name;
   currencies: { 
     [key: string]: Currency 
   };
-  cca2: string;
   capital: string[];
   region: string;
   population: number;
+  flag: string;
+  flags: Flags;
+  subregion?: string;
+  area?: string;
+  languages?: {
+    [key: string]: string 
+  }
+  timezones?: string[];
+  maps?: GoogleMaos;
 }
 
 export default Country;

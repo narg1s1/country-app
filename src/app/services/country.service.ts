@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CountryService {
-  private apiUrl = 'https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population';
+  private apiUrl = 'https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flag';
 
   constructor(private http: HttpClient) { }
 
@@ -19,10 +19,10 @@ export class CountryService {
         name: country.name,
         capital: country.capital?.[0],
         currencies: country.currencies?.[0]?.name,
+        flags: country.flags?.[0].svg,
         region: country.region,
         population: country.population,
-        cca2: country.cca2,
-        flagUrl: `https://countryflagsapi.netlify.app/flag/${country.flag?.toLowerCase()}.svg`
+        flag: country.flag,
       }))),
       catchError(error => {
         console.error('An error occurred while fetching the countries.', error);
