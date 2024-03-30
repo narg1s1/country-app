@@ -7,10 +7,22 @@
   justify-content: space-between;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-  & .user-header__login {
-    color: #445cd6;
-    font-weight: 700;
-    font-size: 20px;
-    text-decoration: none;
+  & .user-header {
+    
+    &__login, 
+    &__logout {
+      font-weight: 700;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  
+    &__login {
+      color: #445cd6;
+    }
+    
+    &__logout {
+      color: #000;
+      text-transform: lowercase;
+    }
   }
 }

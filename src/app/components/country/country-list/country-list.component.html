@@ -1,42 +1,51 @@
 <app-country-header></app-country-header>
-<div class="country-list__container">
-  <h1>{{ userName }}</h1>
+<div class="country-list__container" *ngIf="isAuthenticated(); else isNotAuthenticated">
+  <h1>{{ userRole }}</h1>
 
   <!-- Filtering country list -->
   <div class="country-list__filters">
     <!-- Search filter by country name -->
-    <app-search 
-      (searchChange)="onSearch($event)"
+    <app-search
+      (searchChange)="searchCountriesByName($event)"
     ></app-search>
   
     <!-- Dropdown filter by country region -->
-    <app-filter 
-      (regionSelected)="filterCountries()">
-    </app-filter>
+    <!-- <app-filter 
+      (regionSelected)="filterCountries()"
+      [selectedRegion]="selectedRegion"
+      [regions]="regions"
+    ></app-filter> -->
   </div>
   
+  <div *ngIf="countries.length; else empty">
+    <ul class="country-list__card">
+      <li *ngFor="let country of countries" class="country-list__card--element">
+        <div class="country-list__card--manage" *ngIf="isAdmin">
+          <button>
+            <app-icon-edit></app-icon-edit>
+          </button>
+          <button>
+            <app-icon-delete></app-icon-delete>
+          </button>
+        </div>
+        <div class="country-list__card--flag">
+          <img [src]="getFlagUrl(country.flag)" alt="{{ country.name.common }}">
+        </div>
+        <div class="card-desc">
+          <p><a (click)="getCountryDetails(country.name.common)">{{ country.name.common }}</a></p>
+          <span>
+            <p><b>Population</b>: {{ country.population }}</p>
+            <p><b>Region</b>: {{ country.region }}</p>
+            <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
+          </span>
+        </div>
+      </li> 
+    </ul>
+  </div>
 
-  <ul class="country-list__card">
-    <li *ngFor="let country of countries" class="country-list__card--element">
-      <div class="country-list__card--manage">
-        <button>
-          <app-icon-edit></app-icon-edit>
-        </button>
-        <button>
-          <app-icon-delete></app-icon-delete>
-        </button>
-      </div>
-      <img [src]="getFlagUrl(country.flag)" alt="{{ country.name.common }}">
-      <div class="card-desc">
-        <p><a (click)="getCountryDetails(country.name.common)">{{ country.name.common }}</a></p>
-        <span>
-          <p><b>Population</b>: {{ country.population }}</p>
-          <p><b>Region</b>: {{ country.region }}</p>
-          <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
-        </span>
-      </div>
-    </li> 
-  </ul>
+  <ng-template #empty>
+    <p>Country is not found...</p>
+  </ng-template>
   
   <app-pagination 
     [currentPage]="currentPage" 
@@ -45,3 +54,9 @@
   </app-pagination>
 </div>
 
+<div>
+</div>
+
+<ng-template #isNotAuthenticated>
+  <h1>The list will be available after authorization</h1>
+</ng-template>

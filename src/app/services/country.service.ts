@@ -31,8 +31,12 @@ export class CountryService {
     );
   }
 
-  getCountry(name: string): Observable<Country> {
+  public getCountry(name: string): Observable<Country> {
     const countryUrl = `https://restcountries.com/v3.1/name/${name}`;
     return this.http.get<Country>(countryUrl, {});
+  }
+
+  public searchCountriesByName(name: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}name/${name}?fullText=true`, {});
   }
 }

@@ -1,18 +1,21 @@
-
-<div *ngIf="country$ | async as country; else loading">
-  <h2>{{ country.name.common }}</h2>
-  <p>Official Name: {{ country.name.official }}</p>
-  <p>Capital: {{ country.capital[0] }}</p>
-  <p>Region: {{ country.region }}</p>
-  <p>Subregion: {{ country.subregion }}</p>
-  <p>Population: {{ country.population }}</p>
-  <p>Area: {{ country.area }} km²</p>
-  <p>Languages: {{ getAllLanguages(country.languages) }}</p>
-  <p>Currency: {{ getCurrency(country.currencies) }}</p>
-  <p>Timezone: {{ country.timezones }}</p>
-  <p>Flag: <img [src]="country.flags.svg" alt="Flag of {{ country.name.common }}" /></p>
-  <p>Google Maps: <a href="{{ country.maps?.googleMaps }}" target="_blank">Open in Google Maps</a></p>
-  <button (click)="goBack()">Go Back</button>
+<div *ngIf="country$ | async as country; else loading" class="country-info">
+  <div class="country-info__details">
+    <h2>{{ country.name.common }}</h2>
+    <p> <b>Official Name:</b> {{ country.name.official }}</p>
+    <p> <b>Capital:</b> {{ country.capital[0] }}</p>
+    <p> <b>Region:</b> {{ country.region }}</p>
+    <p> <b>Subregion:</b> {{ country.subregion }}</p>
+    <p> <b>Population:</b> {{ country.population }}</p>
+    <p> <b>Area:</b> {{ country.area }} km²</p>
+    <p> <b>Languages:</b> {{ getAllLanguages(country.languages) }}</p>
+    <p> <b>Currency:</b> {{ getCurrency(country.currencies) }}</p>
+    <p> <b>Timezone:</b> {{ country.timezones }}</p>
+    <p> <b>Google Maps:</b> <a href="{{ country.maps?.googleMaps }}" target="_blank"> Open in Google Maps</a></p>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+  <div  class="country-info__flag">
+    <img [src]="country.flags.svg" alt="Flag of {{ country.name.common }}" />
+  </div>
 </div>
 
 <ng-template #loading>

@@ -1,8 +1,7 @@
 <div class="user-header">
   <h1>Where in the world?</h1>
   <div>
-    <p *ngIf="isAuthenticated()"> <b>{{ getUserRole() }}</b> </p>
     <a class="user-header__login" routerLink="login" *ngIf="!isAuthenticated()">log in</a>
-    <a (click)="logout()" *ngIf="isAuthenticated()">Log Out</a>
+    <a class="user-header__logout" (click)="logout()" *ngIf="isAuthenticated()">Log Out</a>
   </div>
 </div>

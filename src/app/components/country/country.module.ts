@@ -6,7 +6,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 
 import { CountryHeaderComponent } from './country-header/country-header.component';
 import { CountryListComponent } from './country-list/country-list.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     HttpClientModule, 
-    MatDialogModule,
     CommonModule,
     RouterModule,
     FormsModule, 
@@ -32,7 +30,6 @@ const routes: Routes = [
   
     MatButtonModule,
     MatPaginatorModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
   

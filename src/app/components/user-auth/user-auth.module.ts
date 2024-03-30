@@ -4,15 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from '../../services/authentication.service';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'login', component: LoginComponent }
 ];
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
-  exports: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent],
+  exports: [LoginComponent],
   imports: [
     CommonModule,
     FormsModule,

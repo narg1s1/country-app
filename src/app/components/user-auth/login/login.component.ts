@@ -15,7 +15,9 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   
   constructor(
-    private formBuilder: FormBuilder
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
   
   ngOnInit() {
@@ -34,7 +36,25 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-  
+
     this.loading = true;
+    this.authService.login(this.fval['email'].value, this.fval['password'].value, this.fval['role'].value)
+      .subscribe(
+        success => {
+          if (success) {
+            // Navigate to appropriate page based on user role
+            if (this.fval['role'].value === 'admin') {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/operator']);
+            }
+          } else {
+            // Handle login failure
+            console.log('Login failed');
+            // Reset loading state
+            this.loading = false;
+          }
+        }
+      );
   }
 }

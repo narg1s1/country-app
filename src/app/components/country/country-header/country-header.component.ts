@@ -11,25 +11,16 @@ import { Router } from '@angular/router';
 export class CountryHeaderComponent {  
   username: string = '';
   password: string = '';
-  userRole: string = 'admin' || 'operator';
   errorMessage: string = '';
 
   constructor(
-    private dialog: MatDialog,
     private router: Router,
     private authService: AuthService
   ) {}
 
   // Method to check if user is authenticated
   isAuthenticated(): boolean {
-    // return this.authService.isAuthenticatedUser();
-    return false;
-  }
-
-  // Method to get the role of the authenticated user
-  getUserRole(): string | null {
-    // return this.authService.getUserRole();
-    return '';
+    return this.authService.isLoggedIn();
   }
 
   // Method to initiate the login process

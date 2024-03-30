@@ -1,6 +1,8 @@
 .country-list {
   &__container {
     padding: 0 4rem 2rem;
+
+    & h1 {text-transform: capitalize;}
   }
 
   &__filters {
@@ -15,9 +17,8 @@
     display: flex;
     grid-gap: 4rem;
     padding: 0;
-    margin: 30px 0px;
+    margin: 3rem 0px;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     &--element {
       position: relative;
@@ -37,9 +38,14 @@
         color: #000;
       }
 
+    }
+
+    &--flag {
+      width: 280px;
+      height: 180px;
       & img {
-        width: 250px;
-        height: 150px;
+        width: 100%;
+        height: auto;
       }
     }
 

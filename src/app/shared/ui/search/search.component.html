@@ -1,3 +1,6 @@
 <div class="country-search">
-  <input type="text" placeholder="Search by country name" (input)="searchChange.emit()">
+  <input type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search by country name"
+        (input)="searchChange.emit(searchText)">
 </div>
