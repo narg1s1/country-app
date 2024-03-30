@@ -16,6 +16,7 @@ import { CountryModule } from './components/country/country.module';
 import { UserAuthModule } from './components/user-auth/user-auth.module';
 import { SharedModule } from './shared/shared.module';
 import { UiIconsModule } from '../assets/ui-icons/ui-icons.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [],

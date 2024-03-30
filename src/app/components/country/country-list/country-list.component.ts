@@ -3,6 +3,8 @@ import Country from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
 import { AuthService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
+import { CountryEditListComponent } from './country-edit-list/country-edit-list.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-country-list',
@@ -21,6 +23,7 @@ export class CountryListComponent implements OnInit {
   public itemsPerPage: number = 10;
 
   constructor(
+    public dialog: MatDialog,
     private countryService: CountryService,
     public authService: AuthService,
     public router: Router
@@ -56,6 +59,31 @@ export class CountryListComponent implements OnInit {
     } else {
       this.getCountries(); // If search query is empty, load all countries
       this.onPageChange(1);
+    }
+  }
+
+  public editCountry(country: Country): void {
+    const dialogRef = this.dialog.open(CountryEditListComponent, {
+      width: '500px', 
+      data: country 
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // I didn't find the endpoint for editing and deleting a country in REST API
+        console.log('Country updated:', result);
+        this.reloadCountries();
+      }
+    });
+  }
+  public reloadCountries(): void {
+    this.getCountries();
+  }
+
+  public deleteCountry(country: Country): void {
+    const index = this.allCountries.findIndex(c => c.name === country.name);
+    if (index !== -1) {
+      this.countries.splice(index, 1);
     }
   }
 

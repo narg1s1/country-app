@@ -30,7 +30,6 @@ export class CountryHeaderComponent {
 
   // Method to initiate the logout process
   logout(): void {
-    // console.log('Logout initiated');
-    // this.authService.logout();
+    this.authService.logout();
   }
 }

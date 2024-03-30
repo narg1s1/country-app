@@ -2,7 +2,10 @@
   &__container {
     padding: 0 4rem 2rem;
 
-    & h1 {text-transform: capitalize;}
+    & h2 {
+      text-transform: capitalize;
+      color: #2121ad;
+    }
   }
 
   &__filters {

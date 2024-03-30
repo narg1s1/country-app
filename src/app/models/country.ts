@@ -35,7 +35,7 @@ interface Country {
   region: string;
   population: number;
   flag: string;
-  flags: Flags;
+  flags?: Flags;
   subregion?: string;
   area?: string;
   languages?: {

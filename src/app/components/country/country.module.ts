@@ -12,8 +12,10 @@ import { CountryListComponent } from './country-list/country-list.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { UiIconsModule } from '../../../assets/ui-icons/ui-icons.module';
 import { UserAuthModule } from '../user-auth/user-auth.module';
+import { CountryEditListComponent } from './country-list/country-edit-list/country-edit-list.component';
 
 const routes: Routes = [
   { path: '', component: CountryListComponent },
@@ -32,6 +34,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatIconModule,
   
     SharedModule,
     UiIconsModule,
@@ -43,11 +46,13 @@ const routes: Routes = [
     CountryListComponent,
     CountryDetailComponent,
     CountryHeaderComponent,
+    CountryEditListComponent
   ],
   exports: [
     CountryListComponent, 
     CountryDetailComponent, 
     CountryHeaderComponent,
+    CountryEditListComponent
   ],
 })
 export class CountryModule { }

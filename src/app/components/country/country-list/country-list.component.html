@@ -1,6 +1,6 @@
 <app-country-header></app-country-header>
 <div class="country-list__container" *ngIf="isAuthenticated(); else isNotAuthenticated">
-  <h1>{{ userRole }}</h1>
+  <h2>Welcome back, {{ userRole }}!</h2>
 
   <!-- Filtering country list -->
   <div class="country-list__filters">
@@ -21,10 +21,10 @@
     <ul class="country-list__card">
       <li *ngFor="let country of countries" class="country-list__card--element">
         <div class="country-list__card--manage" *ngIf="isAdmin">
-          <button>
+          <button (click)="editCountry(country)">
             <app-icon-edit></app-icon-edit>
           </button>
-          <button>
+          <button (click)="deleteCountry(country)">
             <app-icon-delete></app-icon-delete>
           </button>
         </div>
@@ -54,9 +54,10 @@
   </app-pagination>
 </div>
 
-<div>
-</div>
-
 <ng-template #isNotAuthenticated>
-  <h1>The list will be available after authorization</h1>
+  <h2 style="padding: 1rem;">The list will be available after authorization</h2>
 </ng-template>
+
+<button mat-icon-button (click)="reloadCountries()">
+  <mat-icon>refresh</mat-icon>
+</button>

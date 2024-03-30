@@ -1,0 +1,18 @@
+<div class="backdrop"></div>
+<div class="country-edit-modal">
+  <h1>Edit Country</h1>
+  <form [formGroup]="editForm">
+    <label>Name:</label>
+    <input type="text" formControlName="name">
+    <label>Capital:</label>
+    <input type="text" formControlName="capital">
+    <label>Region:</label>
+    <input type="text" formControlName="region">
+    <label>Population:</label>
+    <input type="number" formControlName="population">
+    <div class="country-edit-modal__actions">
+      <button (click)="saveChanges()">Save</button>
+      <button (click)="close()">Close</button>
+    </div>
+  </form>
+</div>
