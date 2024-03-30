@@ -72,12 +72,9 @@ export class CountryListComponent implements OnInit {
       if (result) {
         // I didn't find the endpoint for editing and deleting a country in REST API
         console.log('Country updated:', result);
-        this.reloadCountries();
+        this.getCountries();
       }
     });
-  }
-  public reloadCountries(): void {
-    this.getCountries();
   }
 
   public deleteCountry(country: Country): void {
@@ -88,8 +85,7 @@ export class CountryListComponent implements OnInit {
   }
 
   public getFlagUrl(flag: string): string {
-    // return `https://countryflagsapi.netlify.app/emoji/${flag}.svg`;
-    return ``;
+    return `https://countryflagsapi.netlify.app/emoji/${flag}.svg`;
   }
 
   public getCountryDetails(name: any): void {

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl!: string;
+  isInvalidRoleError = '';
   
   constructor(
     private router: Router,
@@ -30,9 +31,30 @@ export class LoginComponent implements OnInit {
   
   // for accessing to form fields
   get fval() { return this.loginForm.controls; }
+
+  // Handle error message for radio buttons selection
+  public handleRadioError() {
+    const email = this.fval['email'].value;
+    const role = this.fval['role'].value;
+
+    // Check if the email and role combination is invalid
+    if ((email === 'admin@example.com' && role === 'operator') || 
+        (email === 'operator@example.com' && role === 'admin')) {
+      // Display error message and prevent login
+      this.isInvalidRoleError = 'Invalid role selection for the provided email';
+      // Optionally, you can reset the form here or display a specific error message to the user
+      this.loginForm.reset();
+      return;
+    }
+  }
+
   
   onFormSubmit() {
     this.submitted = true;
+    
+    // Call the method to handle radio button error
+    this.handleRadioError();
+
     if (this.loginForm.invalid) {
       return;
     }
