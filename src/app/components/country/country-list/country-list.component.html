@@ -2,19 +2,11 @@
 <div class="country-list__container" *ngIf="isAuthenticated(); else isNotAuthenticated">
   <h2>Welcome back, {{ userRole }}!</h2>
 
-  <!-- Filtering country list -->
   <div class="country-list__filters">
     <!-- Search filter by country name -->
     <app-search
       (searchChange)="searchCountriesByName($event)"
     ></app-search>
-  
-    <!-- Dropdown filter by country region -->
-    <!-- <app-filter 
-      (regionSelected)="filterCountries()"
-      [selectedRegion]="selectedRegion"
-      [regions]="regions"
-    ></app-filter> -->
   </div>
   
   <div *ngIf="countries.length; else empty">
@@ -29,14 +21,14 @@
           </button>
         </div>
         <div class="country-list__card--flag">
-          <img [src]="getFlagUrl(country.flag)" alt="{{ country.name.common }}">
+          <img [src]="country.flags?.svg" alt="{{ country.name.common }}">
         </div>
         <div class="card-desc">
           <p><a (click)="getCountryDetails(country.name.common)">{{ country.name.common }}</a></p>
           <span>
             <p><b>Population</b>: {{ country.population }}</p>
             <p><b>Region</b>: {{ country.region }}</p>
-            <p><b>Capital</b>: {{ country.capital ? country.capital[0] : '-' }}</p>
+            <p><b>Capital</b>: {{ country.capital }}</p>
           </span>
         </div>
       </li> 

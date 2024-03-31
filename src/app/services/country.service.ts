@@ -8,27 +8,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CountryService {
-  private apiUrl = 'https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flag';
+  private apiUrl = 'https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flags';
 
   constructor(private http: HttpClient) { }
 
   getCountries(): Observable<Country[]> {
-    return this.http.get<any[]>(this.apiUrl)
-    .pipe(
-      map(response => response.map(country => ({
-        name: country.name,
-        capital: country.capital?.[0],
-        currencies: country.currencies?.[0]?.name,
-        flags: country.flags?.[0].svg,
-        region: country.region,
-        population: country.population,
-        flag: country.flag,
-      }))),
-      catchError(error => {
-        console.error('An error occurred while fetching the countries.', error);
-        return throwError(error);
-      })
-    );
+    return this.http.get<Country[]>(this.apiUrl, {});
   }
 
   public getCountry(name: string): Observable<Country> {

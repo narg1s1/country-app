@@ -84,10 +84,6 @@ export class CountryListComponent implements OnInit {
     }
   }
 
-  public getFlagUrl(flag: string): string {
-    return `https://countryflagsapi.netlify.app/emoji/${flag}.svg`;
-  }
-
   public getCountryDetails(name: any): void {
     this.router.navigate(['/countries', name]);
   }

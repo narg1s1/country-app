@@ -1,4 +1,0 @@
-<select id="regionSelect" [(ngModel)]="selectedRegion" (change)="filterCountries()">
-  <option value="">Filter By Region</option>
-  <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
-</select>

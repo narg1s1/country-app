@@ -13,7 +13,6 @@ import { map } from 'rxjs/operators';
   styleUrl: './country-detail.component.scss'
 })
 export class CountryDetailComponent implements OnInit {
-  // public country!: Country;
   country$!: Observable<Country>;
 
   constructor(
