@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -21,19 +21,20 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
   ) { }
   
-  ngOnInit() {
+  ngOnInit(): void {
+    // Initialize login form with validators
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       role: ['', Validators.required]
     });
   }
   
-  // for accessing to form fields
+  // Getter for accessing form fields
   get fval() { return this.loginForm.controls; }
 
-  // Handle error message for radio buttons selection
-  public handleRadioError() {
+  // Handle error message for radio button selection
+  handleRadioError(): void {
     const email = this.fval['email'].value;
     const role = this.fval['role'].value;
 
@@ -44,12 +45,11 @@ export class LoginComponent implements OnInit {
       this.isInvalidRoleError = 'Invalid role selection for the provided email';
       // Optionally, you can reset the form here or display a specific error message to the user
       this.loginForm.reset();
-      return;
     }
   }
 
-  
-  onFormSubmit() {
+  // Handle form submission
+  onFormSubmit(): void {
     this.submitted = true;
     
     // Call the method to handle radio button error
@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+    // Attempt to login using authentication service
     this.authService.login(this.fval['email'].value, this.fval['password'].value, this.fval['role'].value)
       .subscribe(
         success => {
@@ -73,9 +74,9 @@ export class LoginComponent implements OnInit {
           } else {
             // Handle login failure
             console.log('Login failed');
-            // Reset loading state
-            this.loading = false;
           }
+          // Reset loading state
+          this.loading = false;
         }
       );
   }

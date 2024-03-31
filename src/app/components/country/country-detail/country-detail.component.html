@@ -1,8 +1,8 @@
 <div *ngIf="country$ | async as country; else loading" class="country-info">
   <div class="country-info__details">
     <h2>{{ country.name.common }}</h2>
-    <p> <b>Official Name:</b> {{ country.name.official }}</p>
-    <p> <b>Capital:</b> {{ country.capital[0] }}</p>
+    <p *ngIf="country.name.official"> <b>Official Name:</b> {{ country.name.official }}</p>
+    <p> <b>Capital:</b> {{ country.capital }}</p>
     <p> <b>Region:</b> {{ country.region }}</p>
     <p> <b>Subregion:</b> {{ country.subregion }}</p>
     <p> <b>Population:</b> {{ country.population }}</p>
@@ -10,7 +10,7 @@
     <p> <b>Languages:</b> {{ getAllLanguages(country.languages) }}</p>
     <p> <b>Currency:</b> {{ getCurrency(country.currencies) }}</p>
     <p> <b>Timezone:</b> {{ country.timezones }}</p>
-    <p> <b>Google Maps:</b> <a href="{{ country.maps?.googleMaps }}" target="_blank"> Open in Google Maps</a></p>
+    <p *ngIf="country.maps?.googleMaps"> <b>Google Maps:</b> <a href="{{ country.maps?.googleMaps }}" target="_blank"> Open in Google Maps</a></p>
     <button (click)="goBack()">Go Back</button>
   </div>
   <div  class="country-info__flag">

@@ -1,10 +1,16 @@
 <div class="container">
   <div class="card">
+    <!-- Welcome message -->
     <h3>Welcome back!</h3>
+
+    <!-- Login form -->
     <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()" class="login-form">
+
+      <!-- Error message for invalid role selection -->
       <div *ngIf="handleRadioError" class="login-error">
         <div class="login-error-message">{{isInvalidRoleError}}</div>
       </div>
+
       <!-- Email Input -->
       <div class="form-group">
         <label for="email" class="login-label">Email</label>
@@ -15,11 +21,13 @@
           [ngClass]="{ 'login-input-error': submitted && fval['email'].errors }" 
           placeholder="Enter email here"
         />
+        <!-- Validation error messages for email -->
         <div *ngIf="submitted && fval['email'].errors" class="login-error">
           <div *ngIf="fval['email'].errors['required']" class="login-error-message">Email is required</div>
           <div *ngIf="fval['email'].errors['email']" class="login-error-message">Enter valid email address</div>
         </div>
       </div>
+
       <!-- Password Input -->
       <div class="form-group">
         <label for="password" class="login-label">Password</label>
@@ -30,14 +38,17 @@
           [ngClass]="{ 'login-input-error': submitted && fval['password'].errors }" 
           placeholder="Enter password here" 
         />
+        <!-- Validation error message for password -->
         <div *ngIf="submitted && fval['password'].errors" class="login-error">
           <div *ngIf="fval['password'].errors['required']" class="login-error-message">Password is required</div>
         </div>
       </div>
+
       <!-- Role Selection -->
       <div class="form-group">
         <label class="login-label">User Role:</label>
         <div class="login-role-selection">
+          <!-- Radio buttons for role selection -->
           <label class="login-role-label">
             <input type="radio" formControlName="role" [value]="'admin'" class="login-role-input"> Admin
           </label>
@@ -46,12 +57,15 @@
           </label>
         </div>
       </div>
+
       <!-- Login Button -->
       <div class="form-group">
         <button [disabled]="loading" class="login-button">
+          <!-- Loading spinner icon -->
           <span *ngIf="loading" class="login-spinner"></span>
           Login
         </button>
+        <!-- Link to register page -->
         <a routerLink="/register" class="login-link">Register</a>
       </div>
     </form>

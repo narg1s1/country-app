@@ -14,19 +14,23 @@ export class AuthService {
   public currentUser: Observable<UserData | null>;
 
   constructor() {
+    // Initialize currentUserSubject with data from localStorage if available
     const currentUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<UserData | null>(currentUser ? JSON.parse(currentUser) : null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
+  // Getter to access current user data
   public get currentUserValue(): UserData | null {
     return this.currentUserSubject.value;
   }
 
+  // Method to simulate user login
   public login(email: string, password: string, role: string): Observable<boolean> {
     // Mocking authentication request. Replace this with actual API call.
     const authenticatedUser = this.authenticate(email, password, role);
     if (authenticatedUser) {
+      // Set authenticated user data to localStorage and update currentUserSubject
       localStorage.setItem('currentUser', JSON.stringify(authenticatedUser));
       this.currentUserSubject.next(authenticatedUser);
       return of(true);
@@ -35,6 +39,7 @@ export class AuthService {
     }
   }
 
+  // Method to authenticate user
   private authenticate(email: string, password: string, role: string): UserData | null {
     // Replace this with actual authentication logic.
     const validCredentials = [
@@ -48,19 +53,24 @@ export class AuthService {
     return user ? { email: user.email, role: user.role } : null;
   }
 
-  public logout() {
+  // Method to simulate user logout
+  public logout(): void {
+    // Remove currentUser data from localStorage and update currentUserSubject
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
+  // Method to check if user is logged in
   public isLoggedIn(): boolean {
     return !!this.currentUserValue;
   }
 
+  // Method to check if user is an admin
   public isAdmin(): boolean {
     return this.isLoggedIn() && this.currentUserValue?.role === 'admin';
   }
 
+  // Method to check if user is an operator
   public isOperator(): boolean {
     return this.isLoggedIn() && this.currentUserValue?.role === 'operator';
   }

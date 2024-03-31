@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Country from '../../../models/country';
-import { CountryService } from '../../../services/country.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-detail',
   templateUrl: './country-detail.component.html',
-  styleUrl: './country-detail.component.scss'
+  styleUrls: ['./country-detail.component.scss']
 })
 export class CountryDetailComponent implements OnInit {
   country$!: Observable<Country>;
@@ -24,30 +23,31 @@ export class CountryDetailComponent implements OnInit {
   ngOnInit(): void {
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
-      this.country$ = this.getCountry(name).pipe(
-        map((countries: Country[]) => countries[0])
-      );
+      this.country$ = this.fetchCountry(name);
     }
   }
 
-  getCountry(name: string): Observable<Country[]> {
+  // Fetches country data from API
+  private fetchCountry(name: string): Observable<Country> {
     const countryUrl = `https://restcountries.com/v3.1/name/${name}`;
-    return this.http.get<Country[]>(countryUrl);
+    return this.http.get<Country[]>(countryUrl).pipe(
+      map((countries: Country[]) => countries[0])
+    );
   }
 
+  // Formats currency information
   getCurrency(currencies: { [key: string]: { name: string; symbol: string; } }): string {
     const currency = Object.values(currencies)[0]; // Assuming only one currency is present
     return `${currency.name} (${currency.symbol})`;
   }
 
+  // Retrieves an array of all languages
   getAllLanguages(languages: { [key: string]: string } | undefined): string[] {
-    if (!languages) {
-      return [];
-    }
-    return Object.values(languages);
+    return languages ? Object.values(languages) : [];
   }
 
-  public goBack(): void {
+  // Navigates back
+  goBack(): void {
     this.location.back();
   }
 }

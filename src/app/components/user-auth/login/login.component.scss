@@ -19,49 +19,59 @@
 }
 
 .login {
+  // Heading styles
   &-heading {
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
   
+  // Form styles
   &-form {
     display: grid;
     gap: 13px;
     justify-content: center;
   }
   
+  // Label styles
   &-label {
     display: block;
     margin-bottom: 5px;
   }
   
+  // Input styles
   &-input {
     padding: 8px 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
+  // Error state for inputs
   &-input-error {
     border-color: red;
   }
   
+  // Error message styles
   &-error {
     color: red;
     margin-top: 5px;
   }
   
+  // Error message for inputs
   &-error-message {
     margin-top: 5px;
   }
   
+  // Role selection styles
   &-role-selection {
     margin-bottom: 10px;
   }
   
+  // Label styles for role selection
   &-role-label {
     margin-right: 10px;
   }
   
+  // Button styles
   &-button {
     background-color: #007bff;
     color: #fff;
@@ -75,6 +85,7 @@
     }
   }
   
+  // Spinner animation styles
   &-spinner {
     border: 2px solid #fff;
     border-radius: 50%;
@@ -89,6 +100,7 @@
     100% { transform: rotate(360deg); }
   }
   
+  // Link styles
   &-link {
     margin-left: 10px;
     color: #007bff;
@@ -99,4 +111,3 @@
     }
   }
 }
-

@@ -1,28 +1,39 @@
+<!-- Country Header Component -->
 <app-country-header></app-country-header>
+
+<!-- Container for the country list, visible only if authenticated -->
 <div class="country-list__container" *ngIf="isAuthenticated(); else isNotAuthenticated">
+
+  <!-- Welcome message for authenticated users -->
   <h2>Welcome back, {{ userRole }}!</h2>
 
+  <!-- Filters section -->
   <div class="country-list__filters">
     <!-- Search filter by country name -->
-    <app-search
-      (searchChange)="searchCountriesByName($event)"
-    ></app-search>
+    <app-search (searchChange)="searchCountriesByName($event)"></app-search>
   </div>
   
+  <!-- Displaying countries -->
   <div *ngIf="countries.length; else empty">
     <ul class="country-list__card">
       <li *ngFor="let country of countries" class="country-list__card--element">
+        
+        <!-- Management buttons for admin users -->
         <div class="country-list__card--manage" *ngIf="isAdmin">
           <button (click)="editCountry(country)">
-            <app-icon-edit></app-icon-edit>
+            <app-icon-edit></app-icon-edit> <!-- Edit Icon -->
           </button>
           <button (click)="deleteCountry(country)">
-            <app-icon-delete></app-icon-delete>
+            <app-icon-delete></app-icon-delete> <!-- Delete Icon -->
           </button>
         </div>
+        
+        <!-- Display country flag -->
         <div class="country-list__card--flag">
           <img [src]="country.flags?.svg" alt="{{ country.name.common }}">
         </div>
+        
+        <!-- Display country information -->
         <div class="card-desc">
           <p><a (click)="getCountryDetails(country.name.common)">{{ country.name.common }}</a></p>
           <span>
@@ -35,17 +46,20 @@
     </ul>
   </div>
 
+  <!-- Template for empty country list -->
   <ng-template #empty>
     <p>Country is not found...</p>
   </ng-template>
   
+  <!-- Pagination component -->
   <app-pagination 
     [currentPage]="currentPage" 
     [totalPages]="totalPages" 
-    (pageChange)="onPageChange($event)">
-  </app-pagination>
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
 </div>
 
+<!-- Template for unauthenticated users -->
 <ng-template #isNotAuthenticated>
   <h2 style="padding: 1rem;">The list will be available after authorization</h2>
 </ng-template>
